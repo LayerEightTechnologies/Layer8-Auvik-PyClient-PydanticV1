@@ -1,0 +1,30 @@
+# ServiceStatisticsRelationships
+
+Service statistics object's relationships to other resources
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**service** | [**ServiceStatisticsRelationshipsService**](ServiceStatisticsRelationshipsService.md) |  | [optional] 
+**tenant** | [**Tenant**](Tenant.md) |  | [optional] 
+
+## Example
+
+```python
+from layer8_auvik_api_client.models.service_statistics_relationships import ServiceStatisticsRelationships
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of ServiceStatisticsRelationships from a JSON string
+service_statistics_relationships_instance = ServiceStatisticsRelationships.from_json(json)
+# print the JSON string representation of the object
+print ServiceStatisticsRelationships.to_json()
+
+# convert the object into a dict
+service_statistics_relationships_dict = service_statistics_relationships_instance.to_dict()
+# create an instance of ServiceStatisticsRelationships from a dict
+service_statistics_relationships_form_dict = service_statistics_relationships.from_dict(service_statistics_relationships_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
