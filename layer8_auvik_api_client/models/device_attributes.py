@@ -33,10 +33,10 @@ class DeviceAttributes(BaseModel):
     device_type: StrictStr = Field(
         ..., alias="deviceType", description="What type of device it is"
     )
-    make_model: StrictStr = Field(
+    make_model: Optional[StrictStr] = Field(
         ..., alias="makeModel", description="Make and model of this device"
     )
-    vendor_name: StrictStr = Field(
+    vendor_name: Optional[StrictStr] = Field(
         ..., alias="vendorName", description="Vendor name for this device"
     )
     software_version: Optional[StrictStr] = Field(
@@ -172,6 +172,16 @@ class DeviceAttributes(BaseModel):
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
+        # set to None if make_model (nullable) is None
+        # and __fields_set__ contains the field
+        if self.make_model is None and "make_model" in self.__fields_set__:
+            _dict["makeModel"] = None
+
+        # set to None if vendor_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.vendor_name is None and "vendor_name" in self.__fields_set__:
+            _dict["vendorName"] = None
+
         # set to None if software_version (nullable) is None
         # and __fields_set__ contains the field
         if self.software_version is None and "software_version" in self.__fields_set__:
