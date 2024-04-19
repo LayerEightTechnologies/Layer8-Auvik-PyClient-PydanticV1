@@ -35,7 +35,7 @@ class InterfaceAttributes(BaseModel):
     mac_address: Optional[StrictStr] = Field(
         ..., alias="macAddress", description="MAC address"
     )
-    negotiated_speed: StrictStr = Field(
+    negotiated_speed: Optional[StrictStr] = Field(
         ..., alias="negotiatedSpeed", description="Negotiated speed"
     )
     duplex: StrictStr = Field(..., description="Duplex mode of this interface")
@@ -164,6 +164,8 @@ class InterfaceAttributes(BaseModel):
         # and __fields_set__ contains the field
         if self.mac_address is None and "mac_address" in self.__fields_set__:
             _dict["macAddress"] = None
+        if self.negotiated_speed is None and "negotiated_speed" in self.__fields_set__:
+            _dict["negotiatedSpeed"] = None
         return _dict
 
     @classmethod
