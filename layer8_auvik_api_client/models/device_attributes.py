@@ -29,7 +29,9 @@ class DeviceAttributes(BaseModel):
     ip_addresses: conlist(StrictStr) = Field(
         ..., alias="ipAddresses", description="Device's local IP addresses"
     )
-    device_name: StrictStr = Field(..., alias="deviceName", description="Device's name")
+    device_name: Optional[StrictStr] = Field(
+        ..., alias="deviceName", description="Device's name"
+    )
     device_type: StrictStr = Field(
         ..., alias="deviceType", description="What type of device it is"
     )
@@ -172,6 +174,12 @@ class DeviceAttributes(BaseModel):
     def to_dict(self):
         """Returns the dictionary representation of the model using alias"""
         _dict = self.dict(by_alias=True, exclude={}, exclude_none=True)
+
+        # set to None if device_name (nullable) is None
+        # and __fields_set__ contains the field
+        if self.device_name is None and "device_name" in self.__fields_set__:
+            _dict["deviceName"] = None
+
         # set to None if make_model (nullable) is None
         # and __fields_set__ contains the field
         if self.make_model is None and "make_model" in self.__fields_set__:
